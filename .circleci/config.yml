@@ -7,6 +7,18 @@ commands:
       - run: unzip awscliv2.zip
       - run: sudo ./aws/install
       - run: aws --version
+  install_eb:
+    steps:
+      - run: sudo apt install git build-essential zlib1g-dev libssl-dev libncurses-dev libffi-dev libsqlite3-dev libreadline-dev libbz2-dev
+      - run: git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
+      - run: ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+      - run: echo 'export PATH=~/.ebcli-virtual-env/executables:$PATH' >> ~/.bashrc && source ~/.bashrc
+      - run: echo 'export PATH=~/.pyenv/versions/3.7.2/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+      - run: echo '' >> ~/.aws/config
+      - run: echo '[profile eb-cli-circle-ci]' >> ~/.aws/config
+      - run: echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/config
+      - run: echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+      - run: export AWS_EB_PROFILE=eb-cli-circle-ci
         
 
 jobs:
@@ -16,11 +28,9 @@ jobs:
     steps:
       - checkout
       - install_aws
-      - run: echo $AWS_SECRET_ACCESS_KEY
-      - run: echo $AWS_ACCESS_KEY_ID
-      - run: aws configure list
-      # - run: cd udagram && npm i && npm run install && npm run build
-      # - run: cd udagram && npm run deploy
+      - install_eb
+      - run: cd udagram && npm i && npm run install && npm run build
+      - run: cd udagram && npm run deploy:api
   # debloy:
   #   docker:
   #     - image: cimg/node:16.13.1
