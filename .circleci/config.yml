@@ -10,11 +10,8 @@ commands:
   install_eb:
     steps:
       - run: sudo apt update
-      - run: sudo apt install git build-essential zlib1g-dev libssl-dev libncurses-dev libffi-dev libsqlite3-dev libreadline-dev libbz2-dev
-      - run: git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
-      - run: ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
-      - run: export PATH=~/.ebcli-virtual-env/executables:$PATH
-      - run: export PATH=~/.pyenv/versions/3.7.2/bin:$PATH
+      - run: sudo apt install git build-essential zlib1g-dev libssl-dev libncurses-dev libffi-dev libsqlite3-dev libreadline-dev libbz2-dev python-pip python-dev
+      - run: sudo pip install awsebcli
         
 jobs:
   build:
