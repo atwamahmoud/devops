@@ -1,32 +1,18 @@
 version: 2.1
 
-commands:
-  build-fe:
-    steps:
-      - run: cd udagram/udagram-frontend && npm ci && npm run build
-      - run: echo "build frontend"
-  build-api:
-    steps:
-      - run: cd udagram/udagram-api && npm ci && npm run build
-      - run: echo "build api"
-  test-fe:
-    steps:
-      - run: cd udagram/udagram-frontend && npm ci && npm run test
-      - run: echo "test frontend"
 jobs:
   build:
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
       - checkout
-      - build-fe
-      - build-api
+      - cd udagram && npm run build
   test:
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
       - checkout
-      - test-fe
+      - cd udagram && npm run test
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # # See: https://circleci.com/docs/2.0/orb-intro/
 # orbs:
