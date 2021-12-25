@@ -15,11 +15,6 @@ commands:
       - run: ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
       - run: echo 'export PATH=~/.ebcli-virtual-env/executables:$PATH' >> ~/.bashrc && source ~/.bashrc
       - run: echo 'export PATH=~/.pyenv/versions/3.7.2/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
-      - run: echo '' >> ~/.aws/config
-      - run: echo '[profile eb-cli-circle-ci]' >> ~/.aws/config
-      - run: echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/config
-      - run: echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
-      - run: export AWS_EB_PROFILE=eb-cli-circle-ci
         
 
 jobs:
