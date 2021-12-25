@@ -1,7 +1,7 @@
 version: 2.1
 
 commands:
-  - install_aws:
+  install_aws:
     steps:
       - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       - run: unzip awscliv2.zip
