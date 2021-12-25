@@ -16,9 +16,10 @@ commands:
       - run: export PATH=~/.ebcli-virtual-env/executables:$PATH
       - run: export PATH=~/.pyenv/versions/3.7.2/bin:$PATH
         
-
 jobs:
   build:
+    environment:
+      PATH: ~/.pyenv/versions/3.7.2/bin:~/.ebcli-virtual-env/executables:$PATH
     docker:
       - image: cimg/node:16.13.1
     steps:
