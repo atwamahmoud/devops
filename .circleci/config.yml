@@ -3,7 +3,7 @@
 # and using workspace persistence
 version: 2.1
 
-jobs:
+commands:
   build-fe:
     steps:
       - run: cd udagram/udagram-frontend
@@ -16,7 +16,13 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: echo "build api"
-
+jobs:
+  build:
+    docker:
+      - image: cimg/node:stable
+    steps:
+      - build-fe
+      - build-api
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # # See: https://circleci.com/docs/2.0/orb-intro/
 # orbs:
@@ -27,18 +33,24 @@ jobs:
 #   # NOTE: Environment variables containing the necessary secrets can be setup in the CircleCI UI
 #   # See here https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project
 #   aws-s3: circleci/aws-s3@2.0
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build:
-    triggers:
-      branches:
-        only:
-         - master
     jobs:
-      - build-fe
-      - build-api
+      - build:
+        filters:
+          branches:
+            only:
+              - main
+        
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+# workflows:
+#   build:
+#     triggers:
+#       branches: - main
+#     jobs:
+#       - build-fe
+#       - build-api
 #   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
 #     # Inside the workflow, you define the jobs you want to run.
 #     jobs:
