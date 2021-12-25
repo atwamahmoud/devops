@@ -9,6 +9,7 @@ commands:
       - run: aws --version
   install_eb:
     steps:
+      - run: sudo apt update
       - run: sudo apt install git build-essential zlib1g-dev libssl-dev libncurses-dev libffi-dev libsqlite3-dev libreadline-dev libbz2-dev
       - run: git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
       - run: ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
