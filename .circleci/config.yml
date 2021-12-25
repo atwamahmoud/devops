@@ -4,13 +4,13 @@ commands:
   build-fe:
     steps:
       - run: cd udagram/udagram-frontend
-      - run: npm ci
+      - run: npm i
       - run: npm run build
       - run: echo "build fe"
   build-api:
     steps:
       - run: cd udagram/udagram-api
-      - run: npm ci
+      - run: npm i
       - run: npm run build
       - run: echo "build api"
 jobs:
