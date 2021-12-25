@@ -11,8 +11,9 @@ jobs:
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
-      - checkout
-      - run: export CHROME_BIN=/usr/bin/google-chrome && cd udagram && npm i && npm run install && npm run test
+      # - checkout
+      - run: find / -name chrome -type f -perm /111 -ls 2>/dev/null
+      # - run: export CHROME_BIN=/usr/bin/google-chrome && cd udagram && npm i && npm run install && npm run test
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # # See: https://circleci.com/docs/2.0/orb-intro/
 # orbs:
@@ -24,13 +25,13 @@ jobs:
 #   # See here https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project
 #   aws-s3: circleci/aws-s3@2.0
 workflows:
-  build:
-    jobs:
-      - build:
-        filters:
-          branches:
-            only:
-              - master
+  # build:
+  #   jobs:
+  #     - build:
+  #       filters:
+  #         branches:
+  #           only:
+  #             - master
   test:
     jobs:
       - test:
