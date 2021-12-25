@@ -3,12 +3,11 @@ version: 2.1
 commands:
   build-fe:
     steps:
-      - run: cd udagram/udagram-frontend && npm i && npm run build
+      - run: cd udagram/udagram-frontend && npm ci && npm run build
+      - run: echo "build frontend"
   build-api:
     steps:
-      - run: cd udagram/udagram-api
-      - run: npm i
-      - run: npm run build
+      - run: cd udagram/udagram-api && npm ci && npm run build
       - run: echo "build api"
 jobs:
   build:
