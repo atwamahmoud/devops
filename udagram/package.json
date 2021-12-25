@@ -8,8 +8,7 @@
         "build": "npm run build:api && npm run build:fe",
         "prepare:api": "npm run build:api && cd udagram-api && npm run db:start",
         "run:api": "cd udagram-api && npm run run:prod",
-        "set-browser": "cross-env CHROME_BIN=/usr/bin/chromium",
-        "test:fe": "npm run set-browser && cd udagram-frontend && npm run test -- --watch=false",
+        "test:fe": "cd udagram-frontend && cross-env CHROME_BIN=/usr/bin/chromium && npm run test -- --watch=false",
         "test:api": "cd udagram-api && npm run test",
         "test": "npm run test:fe"
     },
