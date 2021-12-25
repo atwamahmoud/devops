@@ -3,16 +3,16 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:16.13.1-browsers
+      - image: cimg/node:16.13.1
     steps:
       - checkout
-      - cd udagram && npm run build
+      - run: cd udagram && npm run build
   test:
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
       - checkout
-      - cd udagram && npm run test
+      - run: cd udagram && npm run test
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # # See: https://circleci.com/docs/2.0/orb-intro/
 # orbs:
