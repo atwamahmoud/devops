@@ -18,6 +18,7 @@ jobs:
     docker:
       - image: cimg/node:17.3.0
     steps:
+      - checkout
       - build-fe
       - build-api
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
