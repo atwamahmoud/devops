@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - install_aws
-      - run: cd udagram && npm run install && npm run build
+      - run: cd udagram && npm i && npm run install && npm run build
       - run: cd udagram && npm run deploy
   # debloy:
   #   docker:
