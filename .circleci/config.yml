@@ -14,8 +14,8 @@ jobs:
     docker:
       - image: cimg/node:16.13.1
     steps:
-      - install_aws
       - checkout
+      - install_aws
       - run: cd udagram && npm run install && npm run build
       - run: cd udagram && npm run deploy
   # debloy:
