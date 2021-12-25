@@ -9,8 +9,8 @@
         "test:fe": "cd udagram-frontend && npm run test -- --watch=false",
         "test:api": "cd udagram-api && npm run test",
         "test": "npm run test:fe",
-        "debloy:fe": "aws s3 cp udagram-frontend/www/ s3://udagram-web-hosting/ --recursive",
-        "debloy:api": "",
+        "deploy:fe": "aws s3 cp udagram-frontend/www/ s3://udagram-web-hosting/ --recursive",
+        "deploy:api": "cd udagram-api && eb deploy",
         "deploy": "npm-run-all deploy:*"
     },
     "devDependencies": {
