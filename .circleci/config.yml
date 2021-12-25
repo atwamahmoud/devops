@@ -16,8 +16,11 @@ jobs:
     steps:
       - checkout
       - install_aws
-      - run: cd udagram && npm i && npm run install && npm run build
-      - run: cd udagram && npm run deploy
+      - run: echo $AWS_SECRET_ACCESS_KEY
+      - run: echo $AWS_ACCESS_KEY_ID
+      - run: aws configure list
+      # - run: cd udagram && npm i && npm run install && npm run build
+      # - run: cd udagram && npm run deploy
   # debloy:
   #   docker:
   #     - image: cimg/node:16.13.1
