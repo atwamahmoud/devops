@@ -1,6 +1,7 @@
 import AWS = require("aws-sdk");
 import { config } from "./config/config";
 
+// This is done to set 
 // Configure AWS
 const credentials = new AWS.SharedIniFileCredentials({ profile: config.aws_profile });
 AWS.config.credentials = credentials;
@@ -20,19 +21,25 @@ export function getGetSignedUrl(key: string): Promise<string> {
       Bucket: config.aws_media_bucket,
       Key: key,
       Expires: signedUrlExpireSeconds,
-    }, resolve);
+    }, (err, url) => {
+      if(err) throw err;
+      resolve(url)
+    });
   });
 }
 
 // Generates an AWS signed URL for uploading objects
 export function getPutSignedUrl(key: string): Promise<string> {
   const signedUrlExpireSeconds = 60 * 5;
-
+  console.log(config.aws_media_bucket)
   return new Promise<string>((resolve) => {
     s3.getSignedUrl("putObject", {
       Bucket: config.aws_media_bucket,
       Key: key,
       Expires: signedUrlExpireSeconds,
-    }, resolve);
+    }, (err, url) => {
+      if(err) throw err;
+      resolve(url)
+    });
   });
 }
