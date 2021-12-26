@@ -3,7 +3,7 @@
         "install:fe": "cd udagram/udagram-frontend && npm i",
         "install:api": "cd udagram/udagram-api && npm i",
         "install": "npm-run-all install:*",
-        "build:fe": "cd udagram/udagram-frontend && npm run build",
+        "build:fe": "cd udagram/udagram-frontend && npm run build -- --prod",
         "build:api": "cd udagram/udagram-api && npm run build",
         "build": "npm-run-all build:*",
         "test:fe": "cd udagram/udagram-frontend && npm run test -- --watch=false",
