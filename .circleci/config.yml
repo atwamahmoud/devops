@@ -10,8 +10,21 @@ commands:
   install_eb:
     steps:
       - run: sudo apt update
-      - run: sudo apt install git build-essential zlib1g-dev libssl-dev libncurses-dev libffi-dev libsqlite3-dev libreadline-dev libbz2-dev python3 python3-pip python3-dev
+      - run: sudo apt install \
+          git \
+          build-essential \
+          zlib1g-dev \
+          libssl-dev \
+          libncurses-dev \
+          libffi-dev \
+          libsqlite3-dev \
+          libreadline-dev \
+          libbz2-dev \
+          python3 \
+          python3-pip \
+          python3-dev
       - run: sudo pip install awsebcli
+      - run: ls -a ~/.aws
         
 jobs:
   build:
