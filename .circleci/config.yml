@@ -22,7 +22,7 @@ jobs:
       - checkout
       - install_aws
       - install_eb
-      - run: cd udagram && npm i && npm run install && npm run build
+      # - run: cd udagram && npm i && npm run install && npm run build
       # - run: cd udagram && eb init --region us-east-1 --platform node.js udagram && npm run deploy:api
   # debloy:
   #   docker:
@@ -43,6 +43,7 @@ workflows:
             application-name: udagram 
             environment-name: udagram-api 
             platform-version: node.js
+            context: udagram
             requires:
               - build
       # - deploy:
