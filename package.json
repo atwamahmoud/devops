@@ -1,0 +1,19 @@
+{
+    "scripts": {
+        "install:fe": "cd udagram/udagram-frontend && npm i",
+        "install:api": "cd udagram/udagram-api && npm i",
+        "install": "npm-run-all install:*",
+        "build:fe": "cd udagram/udagram-frontend && npm run build",
+        "build:api": "cd udagram/udagram-api && npm run build",
+        "build": "npm-run-all build:*",
+        "test:fe": "cd udagram/udagram-frontend && npm run test -- --watch=false",
+        "test:api": "cd udagram/udagram-api && npm run test",
+        "test": "npm run test:fe",
+        "deploy:fe": "aws s3 cp udagram-frontend/www/ s3://udagram-web-hosting/ --recursive",
+        "deploy:api": "cd udagram/udagram-api && eb deploy udagram",
+        "deploy": "npm-run-all deploy:*"
+    },
+    "devDependencies": {
+        "npm-run-all": "^4.1.5"
+    }
+}
