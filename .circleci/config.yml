@@ -17,7 +17,10 @@ jobs:
     steps:
       - checkout # Retrieves source code
       - run: npm i # Installs root, front-end & api packages
-      - run: npm run build # Builds front-end & api
+      - run: 
+        command: npm run build # Builds front-end & api
+        environment: 
+          API_HOST: http://udagram-api.eba-3f5am7iv.us-east-1.elasticbeanstalk.com/api/v0
       - aws-elastic-beanstalk/setup # Sets up EB CLI
       - install_aws # Install AWS CLI to deploy frontend to S3
       - run: npm run deploy # Deploys front-end & api
