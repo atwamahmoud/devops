@@ -3,16 +3,6 @@ version: 2.1
 orbs:
   aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
 
-commands:
-  install_aws:
-    steps:
-      - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      - run: unzip awscliv2.zip
-      - run: sudo ./aws/install
-      - run: aws --version
-  install_eb:
-    steps:
-      - aws-elastic-beanstalk/setup
         
 jobs:
   build:
@@ -20,10 +10,12 @@ jobs:
       - image: cimg/node:16.13.1
     steps:
       - checkout
-      - install_aws
-      - install_eb
-      # - run: cd udagram && npm i && npm run install && npm run build
-      # - run: cd udagram && eb init --region us-east-1 --platform node.js udagram && npm run deploy:api
+      - run: cd udagram
+      - run: npm i
+      - run: pwd
+      - run: npm run install 
+      - run: npm run build
+      - run: pwd
   # debloy:
   #   docker:
   #     - image: cimg/node:16.13.1
