@@ -4,47 +4,28 @@ orbs:
   aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
 
 commands:
-  install_aws:
+  install_aws: # Installs AWS CLI
     steps:
-      - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
       - run: unzip awscliv2.zip
       - run: sudo ./aws/install
-      - run: aws --version
         
 jobs:
   build_deploy:
     docker:
       - image: cimg/node:16.13.1
     steps:
-      - checkout
-      - run: npm i
-      - run: npm run install
-      - run: npm run build
-      - aws-elastic-beanstalk/setup
-      - run: npm run deploy:api
-      
-  # debloy:
-  #   docker:
-  #     - image: cimg/node:16.13.1
-  #   steps: 
-  #     - install_aws
-      # - install_eb
-      # - run: cd udagram && npm run deploy
+      - checkout # Retrieves source code
+      - run: npm i # Installs root, front-end & api packages
+      - run: npm run build # Builds front-end & api
+      - aws-elastic-beanstalk/setup # Sets up EB CLI
+      - install_aws # Install AWS CLI to deploy frontend to S3
+      - run: npm run deploy # Deploys front-end & api
+
 
 
 workflows:
   build_and_deploy:
     jobs:
       - build_deploy:
-          context: udagram
-      # - aws-elastic-beanstalk/deploy:
-      #       app-dir: ./udagram/udagram-api 
-      #       application-name: udagram 
-      #       environment-name: udagram-api 
-      #       platform-version: node.js
-      #       context: udagram
-      #       requires:
-      #         - build
-      # - deploy:
-        # requires:
-        #   - build
+          context: udagram # Uses secret env. variable declared in udagram
