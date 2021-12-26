@@ -21,7 +21,6 @@ jobs:
       - run: npm run install
       - run: npm run build
       - aws-elastic-beanstalk/setup
-      - run: eb init udagram -r $AWS_DEFAULT_REGION -p node.js
       - run: npm run deploy:api
       
   # debloy:
