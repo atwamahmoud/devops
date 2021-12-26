@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
+
 commands:
   install_aws:
     steps:
@@ -9,10 +12,7 @@ commands:
       - run: aws --version
   install_eb:
     steps:
-      - run: sudo apt update
-      - run: sudo apt install git build-essential zlib1g-dev libssl-dev libncurses-dev libffi-dev libsqlite3-dev libreadline-dev libbz2-dev python3 python3-pip python3-dev
-      - run: sudo pip install awsebcli
-      - run: ls -a ~/.aws
+      - aws-elastic-beanstalk/setup
         
 jobs:
   build:
@@ -22,8 +22,8 @@ jobs:
       - checkout
       - install_aws
       - install_eb
-      # - run: cd udagram && npm i && npm run install && npm run build
-      - run: cd udagram && eb init --region us-east-1 --platform node.js udagram && npm run deploy:api
+      - run: cd udagram && npm i && npm run install && npm run build
+      # - run: cd udagram && eb init --region us-east-1 --platform node.js udagram && npm run deploy:api
   # debloy:
   #   docker:
   #     - image: cimg/node:16.13.1
@@ -38,6 +38,13 @@ workflows:
     jobs:
       - build:
           context: udagram
+      - aws-elastic-beanstalk/deploy:
+            app-dir: ./udagram/udagram-api 
+            application-name: udagram 
+            environment-name: udagram-api 
+            platform-version: node.js
+            requires:
+              - build
       # - deploy:
         # requires:
         #   - build
