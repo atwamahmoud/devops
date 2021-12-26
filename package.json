@@ -9,7 +9,7 @@
         "test:fe": "cd udagram/udagram-frontend && npm run test -- --watch=false",
         "test:api": "cd udagram/udagram-api && npm run test",
         "test": "npm run test:fe",
-        "deploy:fe": "aws s3 cp udagram-frontend/www/ s3://udagram-web-hosting/ --recursive",
+        "deploy:fe": "aws s3 cp udagram/udagram-frontend/www/ s3://udagram-web-hosting/ --recursive",
         "deploy:api": "cd udagram/udagram-api && eb init udagram -r $AWS_DEFAULT_REGION -p node.js && eb deploy udagram-api",
         "deploy": "npm-run-all deploy:*"
     },
