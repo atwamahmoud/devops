@@ -11,12 +11,17 @@
 - Backend: [http://udagram-api.us-east-1.elasticbeanstalk.com/](http://udagram-api.us-east-1.elasticbeanstalk.com/)
 - Frontend: [http://udagram-web-hosting.s3-website-us-east-1.amazonaws.com](http://udagram-web-hosting.s3-website-us-east-1.amazonaws.com)
 
-## Infrastructure & Architecture
+## Infrastructure
 
 Please refer to [docs/infra.md](./docs/infra.md) to check the infrastructure documentation
 
+## Pipeline
 
+Please refer to [docs/pipe.md](./docs/pipe.md) to check the pipeline documentation
 
+## Dependencies
+
+Please refer to [docs/deps.md](./docs/deps.md) to check the application dependencies
 
 
 ## Screenshots

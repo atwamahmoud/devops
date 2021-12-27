@@ -17,7 +17,6 @@ The pipeline is first initiated on each push to the `master` branch.
 Once initiated the following sequence is run:
 
 1. Dependencies are installed
-1. The project is linted, if any errors appear, we exit the pipeline
 2. The project is build, if any errors appear, we exit the pipeline
 3. The project is deployed
 
