@@ -49,7 +49,12 @@ jobs:
           command: |
             cd udagram/udagram-api
             eb init udagram -r $AWS_DEFAULT_REGION -p node.js
-            eb setenv AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            eb setenv \
+            AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+            AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+            JWT_SECRET=$JWT_SECRET \
+            POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
+            POSTGRES_USERNAME=$POSTGRES_USERNAME
       - run: npm run deploy # Deploys front-end & api
 
 
@@ -57,7 +62,10 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - install
+      - install:
+          filters:
+            branches:
+              only: master # Other jobs depend on it, so when it doesn't run, Other jobs won't
       - build:
           requires:
           - install
