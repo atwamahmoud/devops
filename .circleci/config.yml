@@ -11,13 +11,36 @@ commands:
       - run: sudo ./aws/install
         
 jobs:
-  build_deploy:
+  install:
+    docker: 
+      - image: cimg/node:16.13.1
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - package.json
+            - udagram/*
+  build:
     docker:
       - image: cimg/node:16.13.1
     steps:
-      - checkout # Retrieves source code
-      - run: npm i # Installs root, front-end & api packages
+      - attach_workspace:
+          at: .
       - run: npm run build # Builds front-end & api
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - package.json
+            - udagram/*
+  deploy:
+    docker:
+      - image: cimg/node:16.13.1
+    steps:
+      - attach_workspace:
+          at: .
       - aws-elastic-beanstalk/setup # Sets up EB CLI
       - install_aws # Install AWS CLI to deploy frontend to S3
       - run:
@@ -33,5 +56,12 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - build_deploy:
+      - install
+      - build:
+          requires:
+          - install
+          context: udagram
+      - deploy:
+          requires:
+            - build
           context: udagram # Uses secret env. variable declared in udagram
