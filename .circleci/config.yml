@@ -21,11 +21,11 @@ jobs:
       - aws-elastic-beanstalk/setup # Sets up EB CLI
       - install_aws # Install AWS CLI to deploy frontend to S3
       - run:
-        name: Prepare api for deployment
-        command: |
-          cd udagram/udagram-api
-          eb init udagram -r $AWS_DEFAULT_REGION -p node.js
-          eb setenv AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+          name: Prepare api for deployment
+          command: |
+            cd udagram/udagram-api
+            eb init udagram -r $AWS_DEFAULT_REGION -p node.js
+            eb setenv AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
       - run: npm run deploy # Deploys front-end & api
 
 
